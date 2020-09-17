@@ -1,6 +1,13 @@
 /frontend/dist/
-/frontend/node_modules/
+*/node_modules/
 /backend/build/
 /.idea/
 /.gradle/
 *.iml
+*.js
+*/!jest.config.js
+*.d.ts
+*.cdk.staging
+*cdk.out
+*.parcel-cache
+*/package-lock.json
