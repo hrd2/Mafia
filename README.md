@@ -23,7 +23,9 @@
    ```
 5. Install [Node JS](https://nodejs.org/en/)
 6. Install the CDK cli with ```npm install -g aws-cdk```
-7. Synthesise the AWS resources in your account: ```cdk --profile user deploy```
+7. ```cd aws```
+8. ```npm install .```
+9. Synthesise the AWS resources in your account: ```cdk --profile user deploy```
 
 ## Building and Running
 
@@ -46,5 +48,6 @@ To run the docker container:
 4. Install [Node JS](https://nodejs.org/en/)
 5. Install [Angular CLI](https://angular.io/cli)
 6. ```cd frontend```
-7. ```ng serve```
-8. Navigate to [localhost:4200](http://localhost:4200/)
+7. ```npm install .```
+8. ```ng serve```
+9. Navigate to [localhost:4200](http://localhost:4200/)

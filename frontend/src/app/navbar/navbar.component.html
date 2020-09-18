@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+  <mat-icon svgIcon="mafia"></mat-icon>
+  <span class="title">Mafia</span>
+  <span class="spacer"></span>
+  <button mat-icon-button *ngIf="_userService.isLoggedIn()" (click)="_userService.logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
