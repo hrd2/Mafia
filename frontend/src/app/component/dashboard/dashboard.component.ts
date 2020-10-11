@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../service/user/user.service";
+import { UserService } from "../../service/user/user.service";
 
 @Component({
     selector: 'app-dashboard',
@@ -14,8 +14,6 @@ export class DashboardComponent implements OnInit {
         this._userService = userService;
     }
 
-    ngOnInit(): void {
-        this._userService.redirectIfNotLoggedIn();
-    }
+    ngOnInit(): void { }
 
 }

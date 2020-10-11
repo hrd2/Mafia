@@ -1,0 +1,14 @@
+.content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found-card {
+  max-width: 600px;
+}
+
+img {
+  height: 128px;
+}

@@ -3,12 +3,16 @@ USER root
 WORKDIR /frontend
 RUN npm install -g @angular/cli
 ADD ./frontend .
+RUN mkdir /frontend/copy-assets
+COPY /frontend/src/assets/* /frontend/copy-assets/
 RUN ng build --prod
 
 FROM gradle:jdk11 as backendbuild
 USER root
 WORKDIR /backend
 ADD ./backend .
+RUN mkdir src/main/resources/static/assets
+COPY --from=frontendbuild /frontend/copy-assets/* src/main/resources/static/assets/
 COPY --from=frontendbuild /frontend/dist/mafia/* src/main/resources/static/
 RUN gradle build
 
