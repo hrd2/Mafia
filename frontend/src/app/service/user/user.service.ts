@@ -1,16 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../model/user.model';
 import { LoginDetails } from '../../model/login-details.model';
 import { environment } from '../../../environments/environment';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    Authorization: 'my-auth-token'
-  }).set('Access-Control-Allow-Origin',"*")
+  headers: environment.httpHeaders,
+  withCredentials: true
 };
 
 @Injectable({
@@ -18,7 +16,7 @@ const httpOptions = {
 })
 export class UserService {
 
-    private _user?: User = undefined;
+    private _user?: User;
     private readonly _router: Router;
     private readonly _http: HttpClient;
 
@@ -28,8 +26,23 @@ export class UserService {
       this._http = http;
     }
 
+    loadDefault(): Promise<boolean> {
+        let promise = new Promise<boolean>((resolve, reject) => {
+            this._http.get<User>(environment.backendUrl + 'user', httpOptions)
+                      .subscribe(user => {
+                                     this._user = user;
+                                     resolve(true);
+                                 },
+                                 err => {
+                                     this._user = undefined;
+                                     resolve(true);
+                                 });
+        });
+        return promise;
+    }
+
     isLoggedIn(): boolean {
-        return this._user != undefined;
+        return this._user !== undefined;
     }
 
     get user(): User {
@@ -37,19 +50,21 @@ export class UserService {
     }
 
     login(loginDetails: LoginDetails): void {
-        const output: Observable<User> = this._http.post<User>(
-        environment.backendUrl + 'login',
-        loginDetails,
-        httpOptions);
-        output.subscribe((user: User) => {
-            this._user = user;
-            this._router.navigate(['']);
-        });
-
+        this._http.post<User>(environment.backendUrl + 'login',
+                              loginDetails, httpOptions)
+                  .subscribe((user: User) => {
+                        this._user = user;
+                        this._router.navigate(['']);
+                   });
     }
 
     logout(): void {
-        this._user = undefined;
-        this._router.navigate(['login']);
+        this._http.post<User>(environment.backendUrl + 'logout', null, {...httpOptions, ...{ observe: 'response'}})
+                  .subscribe(resp => {
+                      if (resp.status == 200) {
+                          this._user = undefined;
+                          this._router.navigate(['login']);
+                      }
+                  });
     }
 }

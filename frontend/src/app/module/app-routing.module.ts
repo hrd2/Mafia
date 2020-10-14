@@ -9,25 +9,38 @@ import { UserService } from "../service/user/user.service";
 
 @Injectable()
 export class RequireLogin implements CanActivate {
-  constructor(private userService: UserService, private router: Router) {}
+    constructor(private userService: UserService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot): boolean {
-    if (!this.userService.isLoggedIn()) {
-      this.router.navigate(['login']);
+    canActivate(route: ActivatedRouteSnapshot,
+                state: RouterStateSnapshot): boolean {
+        if (!this.userService.isLoggedIn()) {
+            this.router.navigate(['login']);
+        }
+        return true;
     }
-    return true;
-  }
+}
+
+@Injectable()
+export class RequireGuest implements CanActivate {
+    constructor(private userService: UserService, private router: Router) {}
+
+    canActivate(route: ActivatedRouteSnapshot,
+                state: RouterStateSnapshot): boolean {
+        if (this.userService.isLoggedIn()) {
+            this.router.navigate(['']);
+        }
+        return true;
+    }
 }
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate:[RequireLogin]},
-  { path: 'login', component: LoginComponent },
-  { path: '**', component: NotFoundComponent }
+    { path: '', component: DashboardComponent, canActivate:[RequireLogin]},
+    { path: 'login', component: LoginComponent, canActivate:[RequireGuest] },
+    { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

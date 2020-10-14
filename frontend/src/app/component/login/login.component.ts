@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from "../../service/user/user.service";
 import { LoginDetails } from "../../model/login-details.model";
 import { FormControl, Validators } from '@angular/forms';
@@ -7,7 +7,7 @@ import { FormControl, Validators } from '@angular/forms';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
     private readonly _userService: UserService;
 
@@ -37,6 +37,4 @@ export class LoginComponent implements OnInit {
     login(): void {
         this._userService.login(new LoginDetails({email: this.emailBox.value, password: this.passwordBox.value}))
     }
-
-    ngOnInit(): void { }
 }

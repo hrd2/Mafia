@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { UserService } from "../../service/user/user.service";
@@ -8,8 +8,7 @@ import { UserService } from "../../service/user/user.service";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   readonly _userService: UserService;
 
@@ -18,9 +17,6 @@ export class NavbarComponent implements OnInit {
               private userService: UserService) {
       this.matIconRegistry.addSvgIcon('mafia', this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/mafia.svg'));
       this._userService = userService
-  }
-
-  ngOnInit(): void {
   }
 
 }
