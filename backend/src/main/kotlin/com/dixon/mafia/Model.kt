@@ -6,4 +6,4 @@ frontend/src/app/model.  They are structures used to communicate to and from the
  */
 
 data class User(val userId: String, val displayName: String, val email: String)
-data class LoginDetails(val email: String, val password: String)
+data class LoginDetails(val email: String)

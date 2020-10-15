@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from "../../service/user/user.service";
 import { LoginDetails } from "../../model/login-details.model";
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
     templateUrl: './login.component.html',
@@ -11,12 +11,16 @@ export class LoginComponent {
 
     private readonly _userService: UserService;
 
-    constructor(private userService: UserService) {
+    constructor(userService: UserService,
+                fb: FormBuilder) {
         this._userService = userService;
+        this.loginForm = fb.group({
+            email: this.emailBox
+        });
     }
 
     emailBox: FormControl = new FormControl('', [Validators.required, Validators.email]);
-    passwordBox: FormControl = new FormControl('', [Validators.required]);
+    loginForm: FormGroup;
 
     getEmailValidationMessage(): String {
         if (this.emailBox.hasError('required')) {
@@ -26,15 +30,7 @@ export class LoginComponent {
         return this.emailBox.hasError('email') ? 'Not a valid email' : '';
     }
 
-    getPasswordValidationMessage(): String {
-        return this.passwordBox.hasError('required') ? 'You must enter a value' : '';
-    }
-
-    anyInvalid(): boolean {
-        return this.passwordBox.invalid || this.emailBox.invalid;
-    }
-
     login(): void {
-        this._userService.login(new LoginDetails({email: this.emailBox.value, password: this.passwordBox.value}))
+        this._userService.login({email: this.emailBox.value})
     }
 }

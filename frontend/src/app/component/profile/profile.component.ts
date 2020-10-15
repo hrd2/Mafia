@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from "../../service/user/user.service";
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { User } from "../../model/user.model";
 
 @Component({
@@ -11,10 +11,15 @@ export class ProfileComponent {
 
     readonly _userService: UserService;
     displayNameBox: FormControl;
+    profileForm: FormGroup;
 
-    constructor(userService: UserService) {
+    constructor(userService: UserService,
+                fb: FormBuilder) {
         this._userService = userService;
         this.displayNameBox = new FormControl(userService.user.displayName, [Validators.required]);
+        this.profileForm = fb.group({
+            displayName: this.displayNameBox
+        });
     }
 
     getDisplayNameValidationMessage(): String {

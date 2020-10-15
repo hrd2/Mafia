@@ -5,13 +5,18 @@
       <mat-card-subtitle>{{ _userService.user.email }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <mat-form-field appearance="fill">
-        <mat-label>Display Name</mat-label>
-        <input matInput placeholder="{{ _userService.user.displayName }}"
-               value="Hello"
-               [formControl]="displayNameBox" required>
-        <mat-error *ngIf="displayNameBox.invalid">{{getDisplayNameValidationMessage()}}</mat-error>
-      </mat-form-field>
+      <div class="profile-picture">
+        <img src="https://www.gravatar.com/avatar/{{ _userService.user.userId }}?s=512"/>
+      </div>
+      <form [formGroup]="profileForm" (submit)="update();">
+        <mat-form-field appearance="fill">
+          <mat-label>Display Name</mat-label>
+          <input matInput placeholder="{{ _userService.user.displayName }}"
+                 value="Hello"
+                 [formControl]="displayNameBox" required>
+          <mat-error *ngIf="displayNameBox.invalid">{{getDisplayNameValidationMessage()}}</mat-error>
+        </mat-form-field>
+      </form>
     </mat-card-content>
     <mat-card-actions>
       <button [disabled]="anyInvalid()" (click)="update();" mat-button>UPDATE DETAILS</button>
