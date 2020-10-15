@@ -49,6 +49,14 @@ export class UserService {
         return this._user
     }
 
+    updateUser(newDetails: User): void {
+        this._http.post<User>(environment.backendUrl + 'updateUser',
+                              newDetails, httpOptions)
+                  .subscribe((user: User) => {
+                        this._user = newDetails;
+                   });
+    }
+
     login(loginDetails: LoginDetails): void {
         this._http.post<User>(environment.backendUrl + 'login',
                               loginDetails, httpOptions)

@@ -1,6 +1,14 @@
 <mat-drawer-container class="navbar-container">
   <mat-drawer mode="side" opened *ngIf="_userService.isLoggedIn()">
     <mat-nav-list>
+      <mat-list-item class="navitem" (click)="_router.navigate([''])">
+        <mat-icon matListIcon>dashboard</mat-icon>
+        <span matLine>Dashboard</span>
+      </mat-list-item>
+      <mat-list-item class="navitem" (click)="_router.navigate(['profile'])">
+        <mat-icon matListIcon>person</mat-icon>
+        <span matLine>Profile</span>
+      </mat-list-item>
       <mat-list-item class="navitem" (click)="_userService.logout()">
         <mat-icon matListIcon>logout</mat-icon>
         <span matLine>Log out</span>

@@ -5,6 +5,10 @@
   height: 100%;
 }
 
-.dashboard-card {
+.profile-card {
   margin: 16px;
+}
+
+mat-form-field {
+  width: 100%;
 }

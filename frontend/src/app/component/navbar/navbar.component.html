@@ -2,7 +2,8 @@
   <mat-icon svgIcon="mafia"></mat-icon>
   <span class="title">Mafia</span>
   <span class="spacer"></span>
-  <span *ngIf="_userService.isLoggedIn()">{{ _userService.user.displayName }}</span>
+  <span *ngIf="_userService.isLoggedIn()" (click)="_router.navigate(['profile'])" class="display-name">{{ _userService.user.displayName }}</span>
+  <img class="avatar" (click)="_router.navigate(['profile'])" *ngIf="_userService.isLoggedIn()" src="https://www.gravatar.com/avatar/{{ _userService.user.userId }}?s=200"/>
   <button mat-icon-button *ngIf="_userService.isLoggedIn()" (click)="_userService.logout()">
     <mat-icon>logout</mat-icon>
   </button>

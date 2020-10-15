@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { UserService } from "../../service/user/user.service";
@@ -10,13 +11,16 @@ import { UserService } from "../../service/user/user.service";
 })
 export class NavbarComponent {
 
-  readonly _userService: UserService;
+    readonly _userService: UserService;
+    readonly _router: Router;
 
-  constructor(private matIconRegistry: MatIconRegistry,
-              private domSanitizer: DomSanitizer,
-              private userService: UserService) {
-      this.matIconRegistry.addSvgIcon('mafia', this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/mafia.svg'));
-      this._userService = userService
-  }
+    constructor(matIconRegistry: MatIconRegistry,
+                domSanitizer: DomSanitizer,
+                userService: UserService,
+                router: Router) {
+        matIconRegistry.addSvgIcon('mafia', domSanitizer.bypassSecurityTrustResourceUrl('/assets/mafia.svg'));
+        this._userService = userService
+        this._router = router;
+    }
 
 }

@@ -5,3 +5,18 @@
 .title {
   margin-left: 16px;
 }
+
+#main-icon {
+    cursor: pointer;
+}
+
+.avatar {
+    border-radius: 50%;
+    max-height: 40px;
+    margin: 8px;
+    cursor: pointer;
+}
+
+.display-name {
+    cursor: pointer;
+}

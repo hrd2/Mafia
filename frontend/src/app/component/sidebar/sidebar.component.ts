@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from "../../service/user/user.service";
 
 @Component({
@@ -8,10 +9,13 @@ import { UserService } from "../../service/user/user.service";
 })
 export class SidebarComponent {
 
-  readonly _userService: UserService;
+    readonly _userService: UserService;
+    readonly _router: Router;
 
-  constructor(private userService: UserService) {
-     this._userService = userService
-  }
+    constructor(userService: UserService,
+                router: Router) {
+        this._userService = userService;
+        this._router = router;
+    }
 
 }

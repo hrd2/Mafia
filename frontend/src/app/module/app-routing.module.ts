@@ -2,6 +2,7 @@ import { NgModule, Injectable } from '@angular/core';
 import { Routes, RouterModule, RouterStateSnapshot, CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 
 import { LoginComponent } from '../component/login/login.component';
+import { ProfileComponent } from '../component/profile/profile.component';
 import { DashboardComponent } from '../component/dashboard/dashboard.component';
 import { NotFoundComponent } from '../component/not-found/not-found.component';
 
@@ -36,6 +37,7 @@ export class RequireGuest implements CanActivate {
 const routes: Routes = [
     { path: '', component: DashboardComponent, canActivate:[RequireLogin]},
     { path: 'login', component: LoginComponent, canActivate:[RequireGuest] },
+    { path: 'profile', component: ProfileComponent, canActivate:[RequireLogin] },
     { path: '**', component: NotFoundComponent }
 ];
 

@@ -13,6 +13,7 @@ import { NavbarComponent } from '../component/navbar/navbar.component';
 import { SidebarComponent } from '../component/sidebar/sidebar.component';
 import { DashboardComponent } from '../component/dashboard/dashboard.component';
 import { NotFoundComponent } from '../component/not-found/not-found.component';
+import { ProfileComponent } from '../component/profile/profile.component';
 
 import { UserService } from '../service/user/user.service';
 
@@ -27,7 +28,8 @@ export function appInitializer(userService: UserService) {
         NavbarComponent,
         SidebarComponent,
         DashboardComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        ProfileComponent
     ],
     imports: [
         AppRoutingModule,
